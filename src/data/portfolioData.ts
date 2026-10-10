@@ -1,3 +1,8 @@
+import avatarImg from "../assets/images/vishesh_profile.jpeg";
+import heroWorkspaceImg from "../assets/images/hero_developer_workspace_1791638257221.jpg";
+import architectureImg from "../assets/images/system_architecture_diagram_1791638269865.jpg";
+import mobileInterfaceImg from "../assets/images/project_mobile_interface_1791638283780.jpg";
+
 export interface ProfileData {
   name: string;
   shortName: string;
@@ -112,8 +117,8 @@ export const INITIAL_PROFILE: ProfileData = {
   location: "India",
   openToOpportunities: true,
   opportunityNote: "Actively interviewing for Software Developer, Backend, and Full-Stack Engineering roles.",
-  avatarUrl: "/src/assets/images/vishesh_editorial_avatar_1791638294939.jpg",
-  heroWorkspaceUrl: "/src/assets/images/hero_developer_workspace_1791638257221.jpg"
+  avatarUrl: avatarImg,
+  heroWorkspaceUrl: heroWorkspaceImg
 };
 
 export const EDUCATION_LIST: EducationItem[] = [
@@ -282,7 +287,7 @@ export const PROJECTS_LIST: ProjectItem[] = [
     resultsAndLessons: "Demonstrated how combining lightweight backend microservices with targeted browser automation creates massive workflow efficiency.",
     status: "Completed",
     featured: true,
-    imageUrl: "/src/assets/images/hero_developer_workspace_1791638257221.jpg",
+    imageUrl: heroWorkspaceImg,
     repoUrl: "https://github.com/vishesh-srivastava/flowforge",
     demoUrl: "",
     documentationSlugs: ["flowforge-architecture", "flowforge-api-spec"]
@@ -336,7 +341,7 @@ export const PROJECTS_LIST: ProjectItem[] = [
     resultsAndLessons: "Solidified understanding of enterprise Java conventions, transactional boundaries, and database query optimization in high-reliability contexts.",
     status: "Completed",
     featured: true,
-    imageUrl: "/src/assets/images/system_architecture_diagram_1791638269865.jpg",
+    imageUrl: architectureImg,
     repoUrl: "https://github.com/vishesh-srivastava/shelfsync",
     demoUrl: "",
     documentationSlugs: ["shelfsync-schema", "shelfsync-api-docs"]
@@ -384,7 +389,7 @@ export const PROJECTS_LIST: ProjectItem[] = [
     resultsAndLessons: "Provided deep experience integrating geospatial third-party APIs with asynchronous communication channels.",
     status: "Completed",
     featured: true,
-    imageUrl: "/src/assets/images/hero_developer_workspace_1791638257221.jpg",
+    imageUrl: heroWorkspaceImg,
     repoUrl: "https://github.com/vishesh-srivastava/safewalk",
     demoUrl: "",
     documentationSlugs: ["safewalk-architecture"]
@@ -431,7 +436,7 @@ export const PROJECTS_LIST: ProjectItem[] = [
     resultsAndLessons: "Demonstrated the power of deterministic feature engineering before rushing into heavy deep learning models.",
     status: "Completed",
     featured: false,
-    imageUrl: "/src/assets/images/system_architecture_diagram_1791638269865.jpg",
+    imageUrl: architectureImg,
     repoUrl: "https://github.com/vishesh-srivastava/phishguard",
     demoUrl: "",
     documentationSlugs: ["phishguard-report"]
@@ -476,7 +481,7 @@ export const PROJECTS_LIST: ProjectItem[] = [
     resultsAndLessons: "Gained hands-on proficiency in matrix operations, computer vision coordinate spaces, and real-time media streams.",
     status: "Completed",
     featured: false,
-    imageUrl: "/src/assets/images/hero_developer_workspace_1791638257221.jpg",
+    imageUrl: heroWorkspaceImg,
     repoUrl: "https://github.com/vishesh-srivastava/artify",
     demoUrl: "",
     documentationSlugs: []
@@ -523,7 +528,7 @@ export const PROJECTS_LIST: ProjectItem[] = [
     resultsAndLessons: "Emphasized the critical importance of immutability in financial transactions and historical billing records.",
     status: "Completed",
     featured: false,
-    imageUrl: "/src/assets/images/system_architecture_diagram_1791638269865.jpg",
+    imageUrl: architectureImg,
     repoUrl: "https://github.com/vishesh-srivastava/cafe-ease",
     demoUrl: "",
     documentationSlugs: ["cafeease-schema"]
@@ -568,7 +573,7 @@ export const PROJECTS_LIST: ProjectItem[] = [
     resultsAndLessons: "Gained deep understanding of matrix sparsity, balancing exploratory vs exploitative recommendations, and API latency constraints.",
     status: "Completed",
     featured: false,
-    imageUrl: "/src/assets/images/hero_developer_workspace_1791638257221.jpg",
+    imageUrl: heroWorkspaceImg,
     repoUrl: "https://github.com/vishesh-srivastava/ecommerce-recommender",
     demoUrl: "",
     documentationSlugs: []
@@ -612,7 +617,7 @@ export const PROJECTS_LIST: ProjectItem[] = [
     resultsAndLessons: "Showcased how lightweight ML interfaces can deliver immediate value without enterprise server bloat.",
     status: "Completed",
     featured: false,
-    imageUrl: "/src/assets/images/system_architecture_diagram_1791638269865.jpg",
+    imageUrl: architectureImg,
     repoUrl: "https://github.com/vishesh-srivastava/agro-gradio",
     demoUrl: "",
     documentationSlugs: []
@@ -658,7 +663,7 @@ export const PROJECTS_LIST: ProjectItem[] = [
     resultsAndLessons: "Cemented understanding of reactive UI state patterns in Dart and native mobile platform channel lifecycles.",
     status: "Completed",
     featured: true,
-    imageUrl: "/src/assets/images/project_mobile_interface_1791638283780.jpg",
+    imageUrl: mobileInterfaceImg,
     repoUrl: "https://github.com/vishesh-srivastava/music-library-flutter",
     demoUrl: "",
     documentationSlugs: ["music-library-spec"]
