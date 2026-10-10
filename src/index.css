@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-primary: #0B0D10;
+    --bg-secondary: #13171E;
+    --bg-elevated: #1A1F29;
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-accent: rgba(255, 107, 53, 0.3);
+    --text-primary: #F5F5F2;
+    --text-muted: #94A3B8;
+    --accent: #FF6B35;
+    --accent-hover: #FA571A;
+    --accent-glow: rgba(255, 107, 53, 0.15);
+  }
+
+  .light {
+    --bg-primary: #F8FAFC;
+    --bg-secondary: #EDF2F7;
+    --bg-elevated: #FFFFFF;
+    --border-subtle: rgba(0, 0, 0, 0.08);
+    --border-accent: rgba(234, 88, 12, 0.35);
+    --text-primary: #0F172A;
+    --text-muted: #64748B;
+    --accent: #EA580C;
+    --accent-hover: #C2410C;
+    --accent-glow: rgba(234, 88, 12, 0.12);
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    overflow-x: hidden;
+  }
+
+  code, pre, .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+/* Subtle dot / grid pattern for technical editorial depth */
+.bg-tech-grid {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+.light .bg-tech-grid {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0B0D10;
+}
+::-webkit-scrollbar-thumb {
+  background: #272E3B;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #FF6B35;
+}
+
+/* Print styling for resume */
+@media print {
+  body {
+    background-color: white !important;
+    color: black !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+}
