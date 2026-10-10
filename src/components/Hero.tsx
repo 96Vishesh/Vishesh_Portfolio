@@ -130,7 +130,7 @@ export function Hero({ profile, onOpenResume, onExploreProjects }: HeroProps) {
                 <span className="text-[#FF6B35] font-semibold">BCA</span>
                 <span>United University</span>
                 <span className="text-slate-600">·</span>
-                <span className="text-slate-300">9.05 GPA (First Rank)</span>
+                <span className="text-slate-300">CGPA 9.05 (1st Rank in Class)</span>
               </div>
             </div>
           </div>
@@ -239,7 +239,7 @@ export function Hero({ profile, onOpenResume, onExploreProjects }: HeroProps) {
               <span>ACADEMIC MERIT</span>
             </div>
             <p className="text-base font-bold text-[#F5F5F2]">Top Rank Graduate</p>
-            <p className="text-xs text-slate-400">9.05 GPA United Univ · 7.89 MCA SRM</p>
+            <p className="text-xs text-slate-400">BCA CGPA 9.05 · MCA CGPA 7.89</p>
           </div>
         </div>
 

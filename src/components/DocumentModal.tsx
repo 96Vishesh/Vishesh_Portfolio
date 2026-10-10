@@ -23,15 +23,14 @@ export function DocumentModal({ document, onClose, onSelectProject }: DocumentMo
   };
 
   const handleDownload = () => {
-    const blob = new Blob([document.content], { type: 'text/plain;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
+    const url = document.fileUrl ?? URL.createObjectURL(new Blob([document.content], { type: 'text/plain;charset=utf-8' }));
     const link = window.document.createElement('a');
     link.href = url;
     link.download = document.downloadFileName;
     window.document.body.appendChild(link);
     link.click();
     window.document.body.removeChild(link);
-    URL.revokeObjectURL(url);
+    if (!document.fileUrl) URL.revokeObjectURL(url);
     showToast({ type: 'success', title: 'Download Started', description: document.downloadFileName });
   };
 

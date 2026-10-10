@@ -2,6 +2,10 @@ import avatarImg from "../assets/images/vishesh_profile.jpeg";
 import heroWorkspaceImg from "../assets/images/hero_developer_workspace_1791638257221.jpg";
 import architectureImg from "../assets/images/system_architecture_diagram_1791638269865.jpg";
 import mobileInterfaceImg from "../assets/images/project_mobile_interface_1791638283780.jpg";
+import resumePdf from "../assets/resume/Vishesh_Srivastava_Resume.pdf";
+
+export const RESUME_PDF_URL = resumePdf;
+export const RESUME_PDF_FILENAME = "Vishesh_Srivastava_Resume.pdf";
 
 export interface ProfileData {
   name: string;
@@ -12,6 +16,8 @@ export interface ProfileData {
   bio: string;
   extendedBio: string[];
   email: string;
+  whatsapp: string; // Country code + number, digits only (used for wa.me links)
+  whatsappUsername: string;
   github: string;
   linkedin: string;
   location: string;
@@ -32,6 +38,15 @@ export interface EducationItem {
   honors?: string;
   description: string;
   courses: string[];
+}
+
+export interface ExperienceItem {
+  id: string;
+  role: string;
+  company: string;
+  period: string;
+  highlights: string[];
+  technologies: string[];
 }
 
 export interface SkillCategory {
@@ -97,26 +112,29 @@ export interface DocumentItem {
   technologies: string[];
   content: string; // Realistic text or Markdown for the in-app viewer
   downloadFileName: string;
+  fileUrl?: string; // When set, downloads serve this file instead of `content`
 }
 
 export const INITIAL_PROFILE: ProfileData = {
   name: "Vishesh Srivastava",
   shortName: "Vishesh",
   monogram: "VS",
-  role: "Software Developer | Backend & Full-Stack Engineer | Automation and AI Enthusiast",
+  role: "Software Developer | Backend & Mobile Engineer | Automation and AI Enthusiast",
   tagline: "I build software that turns complex problems into elegant systems.",
-  bio: "I'm a computer applications graduate focused on building practical software systems, backend services, full-stack applications, and automation workflows. I enjoy breaking complex requirements into understandable architectures and turning them into functional, maintainable products.",
+  bio: "MCA graduate with hands-on experience in software development, automation, and AI-integrated workflows. I build scalable backend systems with Java, Spring Boot, and Flask, automate workflows with Python and Bash, and integrate LLM-powered pipelines into real products.",
   extendedBio: [
-    "My engineering foundation is built on solid computer science principles—object-oriented design, relational data modeling, asynchronous processing, and modular architecture.",
-    "I focus heavily on building clean, predictable REST APIs using Spring Boot, Hibernate/JPA, Flask, and Django, coupled with structured database design in PostgreSQL and MySQL.",
-    "Beyond classical backend engineering, I experiment with end-to-end automation pipelines using Selenium and Python, modern responsive user interfaces with Angular and React, and practical machine learning integrations."
+    "Currently a Flutter Developer at Relu Consultancy, where I build cross-platform mobile apps, automated lead-generation pipelines, and LLM-driven outreach services.",
+    "I focus on clean REST APIs with Spring Boot, Hibernate/JPA, Flask, and Express.js, backed by structured database design in PostgreSQL and MySQL, with exposure to CI/CD, Git-based workflows, and containerised deployments using Docker.",
+    "I have a strong interest in cloud-native solutions, distributed architectures, and AI/ML with LangChain-style frameworks, and I'm comfortable in fast-paced, collaborative Agile teams focused on reliability and performance."
   ],
   email: "srivastava.vishesh96@gmail.com",
-  github: "https://github.com/vishesh-srivastava",
-  linkedin: "https://www.linkedin.com/in/vishesh-srivastava",
-  location: "India",
+  whatsapp: "919354384545",
+  whatsappUsername: "technosapien_01",
+  github: "https://github.com/96Vishesh",
+  linkedin: "https://www.linkedin.com/in/vishesh-s-811914234",
+  location: "Prayagraj, Uttar Pradesh, India",
   openToOpportunities: true,
-  opportunityNote: "Actively interviewing for Software Developer, Backend, and Full-Stack Engineering roles.",
+  opportunityNote: "Open to Software Developer, Backend, and Mobile Engineering roles.",
   avatarUrl: avatarImg,
   heroWorkspaceUrl: heroWorkspaceImg
 };
@@ -125,11 +143,11 @@ export const EDUCATION_LIST: EducationItem[] = [
   {
     id: "mca",
     degree: "Master of Computer Applications (MCA)",
-    institution: "SRM University",
-    period: "2024 – 2026",
-    status: "In Progress / Final Year",
+    institution: "SRM University, Sonepat, Haryana",
+    period: "Sept 2024 – Present",
+    status: "In Progress",
     scoreLabel: "Current CGPA",
-    scoreValue: "7.89",
+    scoreValue: "7.89 / 10.0",
     description: "Advanced study focusing on distributed enterprise systems, cloud platforms, advanced database management, algorithm analysis, and modern web architectures.",
     courses: [
       "Advanced Database Management Systems",
@@ -142,12 +160,12 @@ export const EDUCATION_LIST: EducationItem[] = [
   {
     id: "bca",
     degree: "Bachelor of Computer Applications (BCA)",
-    institution: "United University",
-    period: "2021 – 2024",
+    institution: "United University, Prayagraj, Uttar Pradesh",
+    period: "Sept 2021 – May 2024",
     status: "Graduated",
-    scoreLabel: "Graduation GPA",
-    scoreValue: "9.05",
-    honors: "First Rank / Academic Gold Medalist",
+    scoreLabel: "CGPA",
+    scoreValue: "9.05 / 10.0",
+    honors: "1st Rank in Class",
     description: "Comprehensive foundation in core computer science, relational databases, object-oriented programming in Java and Python, data structures, and computer networks.",
     courses: [
       "Data Structures & Algorithms",
@@ -159,80 +177,119 @@ export const EDUCATION_LIST: EducationItem[] = [
   }
 ];
 
+export const EXPERIENCE_LIST: ExperienceItem[] = [
+  {
+    id: "relu-consultancy",
+    role: "Flutter Developer",
+    company: "Relu Consultancy",
+    period: "Feb 2025 – Present",
+    highlights: [
+      "Developed cross-platform mobile applications using Flutter and Dart, following Agile workflows with Git for version control and collaborative code management.",
+      "Built a booking application (similar to District / BookMyShow) targeting toddlers through college-going students — supporting event discovery, seat selection, and payment workflows.",
+      "Developed a fully automated lead-extraction pipeline that processes raw data, extracts valid emails, and sequences personalised outreach — applying Python scripting and automation principles.",
+      "Engineered an automated LinkedIn lead-generation service that monitors posts, extracts commenter profiles, and dispatches formatted, sequenced outreach emails — leveraging LLM-based content generation for intelligent output.",
+      "Collaborated with backend teams to integrate REST APIs into mobile screens, contributing to scalable, distributed service architectures.",
+      "Documented workflows and API integrations to support team knowledge-sharing and maintainability."
+    ],
+    technologies: ["Flutter", "Dart", "Python", "LLM Integration", "REST APIs", "Git"]
+  }
+];
+
+export const CERTIFICATIONS: string[] = [
+  "Software Engineering Job Simulation — JPMorgan Chase & Co. (Forage)",
+  "Development with Java — Enterprise Java and Spring Framework",
+  "Python for Data Science — IBM",
+  "Artificial Intelligence Analyst — IBM"
+];
+
 export const SKILL_CATEGORIES: SkillCategory[] = [
   {
     id: "languages",
     title: "Programming Languages",
-    description: "Core languages used for backend logic, algorithmic problem solving, scripting, and system queries.",
+    description: "Core languages used for backend logic, mobile apps, scripting, automation, and data queries.",
     skills: [
-      { name: "Java", levelDescription: "Core OOP, Collections, Multi-threading, Streams API", highlighted: true, relatedProjects: ["shelf-sync", "cafe-ease"] },
-      { name: "Python", levelDescription: "Backend services, data parsing, automation, ML pipelines", highlighted: true, relatedProjects: ["flowforge", "phishguard", "artify", "agro-gradio", "safewalk"] },
-      { name: "SQL", levelDescription: "Complex joins, indexing, query optimization, migrations", highlighted: true, relatedProjects: ["shelf-sync", "flowforge", "cafe-ease"] },
-      { name: "JavaScript", levelDescription: "ES6+, asynchronous promises, event loops, DOM manipulation", highlighted: false, relatedProjects: ["shelf-sync", "flowforge", "safewalk"] },
-      { name: "HTML5 / CSS3", levelDescription: "Semantic structuring, flexbox, CSS grid, accessible styling", highlighted: false, relatedProjects: ["flowforge", "shelf-sync"] }
+      { name: "Java", levelDescription: "Core OOP, Collections, Streams API, enterprise Spring development", highlighted: true, relatedProjects: ["shelf-sync", "cafe-ease", "flowforge"] },
+      { name: "Python", levelDescription: "Automation scripts, Flask services, scraping, LLM pipelines, computer vision", highlighted: true, relatedProjects: ["flowforge", "artify"] },
+      { name: "Dart", levelDescription: "Flutter widgets, async programming, state management", highlighted: true, relatedProjects: ["music-library"] },
+      { name: "Bash", levelDescription: "Shell scripting for automation and build workflows", highlighted: false, relatedProjects: [] },
+      { name: "SQL", levelDescription: "Joins, indexing, constraints, transactional queries", highlighted: true, relatedProjects: ["shelf-sync", "flowforge", "cafe-ease"] },
+      { name: "JavaScript", levelDescription: "ES6+, asynchronous programming, DOM manipulation", highlighted: false, relatedProjects: ["flowforge"] }
     ]
   },
   {
     id: "backend",
     title: "Backend Engineering & APIs",
-    description: "Enterprise frameworks, ORMs, microservices structure, and RESTful API architecture.",
+    description: "Enterprise frameworks, ORMs, and RESTful API architecture.",
     skills: [
-      { name: "Spring Boot", levelDescription: "Dependency injection, Spring Security, REST controllers", highlighted: true, relatedProjects: ["shelf-sync", "cafe-ease", "flowforge"] },
-      { name: "Hibernate / JPA", levelDescription: "Entity mappings, relationships, criteria queries, transaction boundaries", highlighted: true, relatedProjects: ["shelf-sync", "cafe-ease"] },
-      { name: "Flask", levelDescription: "Lightweight microservices, blueprint routing, REST endpoints", highlighted: true, relatedProjects: ["flowforge", "safewalk", "artify"] },
-      { name: "Django", levelDescription: "ORM, model validation, admin scaffolding, auth pipeline", highlighted: false, relatedProjects: ["ecommerce-recommendation"] },
-      { name: "Express.js", levelDescription: "Middleware chains, routing, asynchronous handlers", highlighted: false, relatedProjects: ["flowforge"] },
-      { name: "REST API Design", levelDescription: "HTTP status conventions, payload contract validation, error schemas", highlighted: true, relatedProjects: ["shelf-sync", "flowforge", "cafe-ease"] }
+      { name: "Spring Boot", levelDescription: "REST controllers, dependency injection, service layers", highlighted: true, relatedProjects: ["shelf-sync", "cafe-ease", "flowforge"] },
+      { name: "Hibernate / JPA", levelDescription: "Entity mappings, relationships, transaction boundaries", highlighted: true, relatedProjects: ["shelf-sync", "cafe-ease"] },
+      { name: "Flask", levelDescription: "Lightweight services, blueprint routing, REST endpoints", highlighted: true, relatedProjects: ["flowforge", "artify"] },
+      { name: "Express.js", levelDescription: "Middleware chains, routing, asynchronous handlers", highlighted: false, relatedProjects: [] },
+      { name: "RESTful APIs", levelDescription: "HTTP conventions, payload validation, error schemas", highlighted: true, relatedProjects: ["shelf-sync", "flowforge", "cafe-ease"] }
     ]
   },
   {
     id: "databases",
-    title: "Databases & Storage",
-    description: "Relational persistence, data modeling, integrity constraints, and document stores.",
+    title: "Databases",
+    description: "Relational persistence, data modeling, and integrity constraints.",
     skills: [
-      { name: "PostgreSQL", levelDescription: "ACID transactions, foreign key constraints, JSONB, indexing", highlighted: true, relatedProjects: ["flowforge", "shelf-sync"] },
-      { name: "MySQL", levelDescription: "Relational schemas, stored procedures, normalization", highlighted: true, relatedProjects: ["cafe-ease"] },
-      { name: "Firebase Firestore", levelDescription: "Realtime synchronization, document collections, rule security", highlighted: false, relatedProjects: ["safewalk", "artify"] }
-    ]
-  },
-  {
-    id: "frontend",
-    title: "Frontend Development",
-    description: "Component architecture, single-page application routing, responsive client interfaces.",
-    skills: [
-      { name: "Angular", levelDescription: "TypeScript components, services, dependency injection, RxJS", highlighted: true, relatedProjects: ["shelf-sync", "flowforge"] },
-      { name: "React", levelDescription: "Functional components, custom hooks, state orchestration", highlighted: true, relatedProjects: ["flowforge"] },
-      { name: "Responsive UI", levelDescription: "Mobile-first layouts, adaptive navigation, accessibility standards", highlighted: false, relatedProjects: ["shelf-sync", "flowforge"] }
-    ]
-  },
-  {
-    id: "automation",
-    title: "Automation & Integrations",
-    description: "Headless browser scraping, workflow execution, webhooks, and third-party APIs.",
-    skills: [
-      { name: "Selenium", levelDescription: "WebDriver automation, dynamic element waits, test execution", highlighted: true, relatedProjects: ["flowforge"] },
-      { name: "Google Maps API", levelDescription: "Geocoding, polyline routing, location clustering", highlighted: false, relatedProjects: ["safewalk"] },
-      { name: "Twilio API", levelDescription: "SMS alerts, webhook callbacks, verification messages", highlighted: false, relatedProjects: ["safewalk"] }
+      { name: "PostgreSQL", levelDescription: "ACID transactions, foreign key constraints, indexing", highlighted: true, relatedProjects: ["flowforge", "shelf-sync"] },
+      { name: "MySQL", levelDescription: "Relational schemas, normalization, transactional consistency", highlighted: true, relatedProjects: ["cafe-ease"] }
     ]
   },
   {
     id: "mobile",
     title: "Mobile Development",
-    description: "Cross-platform mobile interfaces, state management, and device integration.",
+    description: "Cross-platform mobile interfaces, state management, and API integration.",
     skills: [
-      { name: "Flutter", levelDescription: "Dart widgets, provider state handling, audio player integrations", highlighted: true, relatedProjects: ["music-library"] }
+      { name: "Flutter", levelDescription: "Cross-platform apps, widget composition, REST API integration", highlighted: true, relatedProjects: ["music-library"] },
+      { name: "Android Studio", levelDescription: "Emulators, device debugging, build configuration", highlighted: false, relatedProjects: ["music-library"] }
+    ]
+  },
+  {
+    id: "ai",
+    title: "AI/ML & Automation",
+    description: "LLM-powered pipelines, browser automation, and Python-based workflow automation.",
+    skills: [
+      { name: "LLM Integration", levelDescription: "LLM-based content generation in automated outreach pipelines", highlighted: true, relatedProjects: [] },
+      { name: "LangChain-style Pipelines", levelDescription: "Chaining prompts, tools, and data sources into workflows", highlighted: false, relatedProjects: [] },
+      { name: "Selenium", levelDescription: "WebDriver automation, scraping job descriptions", highlighted: true, relatedProjects: ["flowforge"] },
+      { name: "OpenCV", levelDescription: "Facial landmark detection, real-time image processing", highlighted: false, relatedProjects: ["artify"] }
+    ]
+  },
+  {
+    id: "web",
+    title: "Web",
+    description: "Client-side technologies for web interfaces.",
+    skills: [
+      { name: "HTML / CSS", levelDescription: "Semantic structure, responsive layouts", highlighted: false, relatedProjects: ["flowforge"] },
+      { name: "Angular (Basic)", levelDescription: "Components, services, data binding", highlighted: false, relatedProjects: ["flowforge", "cafe-ease"] },
+      { name: "JSON", levelDescription: "API payload design and parsing", highlighted: false, relatedProjects: [] }
+    ]
+  },
+  {
+    id: "devops",
+    title: "CI/CD, DevOps & Cloud",
+    description: "Version control, containerization, pipelines, and cloud deployment.",
+    skills: [
+      { name: "Git & GitHub", levelDescription: "Branching, pull requests, collaborative workflows", highlighted: true, relatedProjects: ["shelf-sync", "flowforge"] },
+      { name: "Docker", levelDescription: "Containerised deployments", highlighted: true, relatedProjects: [] },
+      { name: "Kubernetes (familiar)", levelDescription: "Container orchestration fundamentals", highlighted: false, relatedProjects: [] },
+      { name: "Jenkins (familiar)", levelDescription: "CI/CD pipeline principles", highlighted: false, relatedProjects: [] },
+      { name: "Gerrit (familiar)", levelDescription: "Code review workflows", highlighted: false, relatedProjects: [] },
+      { name: "Render", levelDescription: "Cloud web service deployments", highlighted: false, relatedProjects: [] },
+      { name: "Exoscale (familiar)", levelDescription: "Cloud-native deployment principles", highlighted: false, relatedProjects: [] }
     ]
   },
   {
     id: "tools",
-    title: "Developer Tools & Workflows",
-    description: "Version control, containerization, build automation, and API validation tooling.",
+    title: "Developer Tools",
+    description: "IDEs, API testing, and documentation tooling.",
     skills: [
-      { name: "Git & GitHub", levelDescription: "Branching strategies, pull requests, issue tracking", highlighted: true, relatedProjects: ["shelf-sync", "flowforge"] },
-      { name: "Docker", levelDescription: "Multi-stage Dockerfiles, compose environments, service isolation", highlighted: true, relatedProjects: ["shelf-sync", "flowforge"] },
-      { name: "Maven", levelDescription: "POM dependency management, build plugins, artifact packaging", highlighted: false, relatedProjects: ["shelf-sync", "cafe-ease"] },
-      { name: "Postman & OpenAPI", levelDescription: "Endpoint testing, contract assertions, documentation generation", highlighted: true, relatedProjects: ["shelf-sync", "cafe-ease"] },
-      { name: "Render", levelDescription: "Cloud web service deployments, environment variables", highlighted: false, relatedProjects: ["flowforge"] }
+      { name: "IntelliJ IDEA", levelDescription: "Java and Spring development", highlighted: false, relatedProjects: ["shelf-sync", "cafe-ease"] },
+      { name: "VS Code", levelDescription: "Python, Dart, and web development", highlighted: false, relatedProjects: [] },
+      { name: "Postman & OpenAPI", levelDescription: "Endpoint testing and API documentation", highlighted: true, relatedProjects: ["shelf-sync", "cafe-ease"] },
+      { name: "Jupyter Notebook", levelDescription: "Data exploration and prototyping", highlighted: false, relatedProjects: [] }
     ]
   }
 ];
@@ -244,16 +301,16 @@ export const PROJECTS_LIST: ProjectItem[] = [
     title: "FlowForge",
     subtitle: "Automated JD & Resume Customization Tool",
     category: "Full-Stack Development",
-    summary: "An automated engineering solution designed to eliminate friction in job applications by connecting job descriptions with tailored resume alignment, headless browser orchestration, and robust backend services.",
+    summary: "An automated pipeline (Oct 2025) that scrapes job descriptions and dynamically tailors resumes based on keyword and role relevance, using Python scripting and NLP-driven matching logic.",
     problem: "Job seekers spend hours manually analyzing lengthy job descriptions, identifying missing keywords, and adjusting resumes per submission. Standard job portals provide no programmatic bridge to streamline this alignment.",
     solution: "Built a multi-tiered pipeline: a Python/Flask parsing engine extracts core competencies and requirements from job postings; an Angular/React interface allows custom parameter tuning; and Selenium automates the repetitive application verification flow.",
     myRole: "Full-Stack Engineer & Automation Architect — designed the end-to-end data pipeline, Flask microservices, database schemas in PostgreSQL, and automated test scripts.",
-    technologies: ["Python", "Flask", "PostgreSQL", "Selenium", "Angular", "Spring Boot"],
+    technologies: ["Python", "Java", "Flask", "PostgreSQL", "Selenium", "Angular", "Spring Boot"],
     keyFeatures: [
-      "Job Description Text Extraction & Keyword Analysis",
-      "Dynamic Resume Section Scoring against JD Requirements",
-      "Headless Selenium Automation for Form Verification",
-      "RESTful API Service for Document Processing",
+      "Automated Job Description Scraping with Selenium",
+      "NLP-Driven Keyword and Role-Relevance Matching",
+      "Backend Logic Mapping Required Skills to Customized Resume Content",
+      "RESTful APIs for Job Scraping, Resume Generation, and Data Persistence",
       "PostgreSQL Persistence for Candidate Profiles & Job Histories"
     ],
     architectureOverview: "Client UI submits JD and resume payloads to the API Gateway. The Flask worker parses textual requirements into an structured semantic index, queries PostgreSQL for candidate credentials, and provides a candidate match report.",
@@ -288,7 +345,7 @@ export const PROJECTS_LIST: ProjectItem[] = [
     status: "Completed",
     featured: true,
     imageUrl: heroWorkspaceImg,
-    repoUrl: "https://github.com/vishesh-srivastava/flowforge",
+    repoUrl: "https://github.com/96Vishesh/flowforge",
     demoUrl: "",
     documentationSlugs: ["flowforge-architecture", "flowforge-api-spec"]
   },
@@ -298,13 +355,15 @@ export const PROJECTS_LIST: ProjectItem[] = [
     title: "ShelfSync",
     subtitle: "Enterprise Inventory Management System",
     category: "Backend Engineering",
-    summary: "A robust enterprise-grade inventory platform built with Spring Boot, Hibernate/JPA, and PostgreSQL, providing transactional safety for stock tracking, supplier management, and catalog auditing.",
+    summary: "A scalable inventory management system (May 2025) built with Spring Boot, PostgreSQL, and RESTful APIs to manage products, batches, stock levels, and availability across distributed data layers.",
     problem: "Traditional small-to-medium enterprise inventory setups suffer from concurrency race conditions during stock updates, lack of audit trails, and brittle synchronization between warehouse entries and sales logs.",
     solution: "Designed a clean layered backend architecture using Spring Boot and JPA with pessimistic/optimistic locking mechanisms, relational normalization in PostgreSQL, and an intuitive Angular interface.",
     myRole: "Backend Engineer — architected entity relationships, transaction boundaries, REST controllers, pagination query optimizations, and API documentation.",
     technologies: ["Spring Boot", "Hibernate / JPA", "PostgreSQL", "Angular", "Maven", "Docker"],
     keyFeatures: [
-      "ACID-Compliant Transactional Stock In/Out Adjustments",
+      "Inventory Tracking with Batch Lifecycle Management",
+      "Real-Time Stock Level Updates",
+      "RESTful APIs for Inventory Operations and Reporting",
       "Hierarchical Product Category & SKU Management",
       "Supplier Ledger and Re-order Alert Triggers",
       "Paginated Server-Side Search with Filter Specifications",
@@ -342,7 +401,7 @@ export const PROJECTS_LIST: ProjectItem[] = [
     status: "Completed",
     featured: true,
     imageUrl: architectureImg,
-    repoUrl: "https://github.com/vishesh-srivastava/shelfsync",
+    repoUrl: "https://github.com/96Vishesh/shelfsync",
     demoUrl: "",
     documentationSlugs: ["shelfsync-schema", "shelfsync-api-docs"]
   },
@@ -388,9 +447,9 @@ export const PROJECTS_LIST: ProjectItem[] = [
     testingAndValidation: "Simulated coordinate routing across test city grids; validated Twilio test SMS receipts and Firestore read/write speeds.",
     resultsAndLessons: "Provided deep experience integrating geospatial third-party APIs with asynchronous communication channels.",
     status: "Completed",
-    featured: true,
+    featured: false,
     imageUrl: heroWorkspaceImg,
-    repoUrl: "https://github.com/vishesh-srivastava/safewalk",
+    repoUrl: "https://github.com/96Vishesh/safewalk",
     demoUrl: "",
     documentationSlugs: ["safewalk-architecture"]
   },
@@ -437,7 +496,7 @@ export const PROJECTS_LIST: ProjectItem[] = [
     status: "Completed",
     featured: false,
     imageUrl: architectureImg,
-    repoUrl: "https://github.com/vishesh-srivastava/phishguard",
+    repoUrl: "https://github.com/96Vishesh/phishguard",
     demoUrl: "",
     documentationSlugs: ["phishguard-report"]
   },
@@ -445,13 +504,13 @@ export const PROJECTS_LIST: ProjectItem[] = [
     id: "artify",
     slug: "artify",
     title: "ARtify",
-    subtitle: "Augmented Reality Face-Filter Application",
+    subtitle: "Augmented Reality Face Filter Web App",
     category: "AI and Machine Learning",
-    summary: "An interactive computer-vision project exploring real-time facial landmark detection, overlay matrix transformations, and visual filter rendering via camera streams.",
+    summary: "A web-based AR application (Apr 2024) applying real-time face filters using computer vision, with backend services that manage image processing requests and stay performant under load.",
     problem: "Real-time face-filter overlays require precise landmark tracking without introducing video playback stutter or misalignment across head rotations.",
     solution: "Implemented an OpenCV and MediaPipe facial mesh pipeline connected through a lightweight Flask service, rendering responsive digital masks and filters.",
     myRole: "Computer Vision Developer — calibrated camera calibration matrices, facial mesh landmark bindings, and rendering overlays.",
-    technologies: ["Python", "Flask", "OpenCV", "MediaPipe", "Firebase"],
+    technologies: ["Python", "Flask", "OpenCV"],
     keyFeatures: [
       "468-Point Real-Time Facial Mesh Landmark Tracking",
       "Geometric Perspective Warp for 2D/3D Filter Overlays",
@@ -480,9 +539,9 @@ export const PROJECTS_LIST: ProjectItem[] = [
     testingAndValidation: "Tested under varied lighting conditions and head tilt angles up to 45 degrees.",
     resultsAndLessons: "Gained hands-on proficiency in matrix operations, computer vision coordinate spaces, and real-time media streams.",
     status: "Completed",
-    featured: false,
+    featured: true,
     imageUrl: heroWorkspaceImg,
-    repoUrl: "https://github.com/vishesh-srivastava/artify",
+    repoUrl: "https://github.com/96Vishesh/artify",
     demoUrl: "",
     documentationSlugs: []
   },
@@ -492,11 +551,11 @@ export const PROJECTS_LIST: ProjectItem[] = [
     title: "CafeEase",
     subtitle: "Enterprise Cafe Management System",
     category: "Backend Engineering",
-    summary: "A structured cafe and restaurant management application orchestrating customer orders, live billing, kitchen queue status, and ingredient inventory tracking.",
+    summary: "A cafe management system (Apr 2025) with backend services for order processing, billing, and inventory updates, keeping orders, stock, and billing records consistent.",
     problem: "Small food service businesses face chaotic coordination between counter billing, kitchen ticket preparation, and ingredient replenishment.",
     solution: "Developed an integrated Spring Boot and Hibernate system with MySQL persistence, supporting table ordering, automated bill calculations with tax breakdowns, and stock decrement.",
     myRole: "Backend Developer — created relational database schema in MySQL, implemented Hibernate entities, service transactions, and REST APIs.",
-    technologies: ["Java", "Spring Boot", "Hibernate", "MySQL", "Maven"],
+    technologies: ["Angular.js", "Java", "Spring Boot", "Hibernate", "MySQL"],
     keyFeatures: [
       "Table & Order Lifecycle Management (Placed, Preparing, Served, Billed)",
       "Automatic Bill Calculation with Tax & Discount Line Items",
@@ -527,9 +586,9 @@ export const PROJECTS_LIST: ProjectItem[] = [
     testingAndValidation: "Validated via Postman end-to-end collection covering the entire lifecycle from order placement to bill settlement.",
     resultsAndLessons: "Emphasized the critical importance of immutability in financial transactions and historical billing records.",
     status: "Completed",
-    featured: false,
+    featured: true,
     imageUrl: architectureImg,
-    repoUrl: "https://github.com/vishesh-srivastava/cafe-ease",
+    repoUrl: "https://github.com/96Vishesh/cafe-ease",
     demoUrl: "",
     documentationSlugs: ["cafeease-schema"]
   },
@@ -574,7 +633,7 @@ export const PROJECTS_LIST: ProjectItem[] = [
     status: "Completed",
     featured: false,
     imageUrl: heroWorkspaceImg,
-    repoUrl: "https://github.com/vishesh-srivastava/ecommerce-recommender",
+    repoUrl: "https://github.com/96Vishesh/ecommerce-recommender",
     demoUrl: "",
     documentationSlugs: []
   },
@@ -618,7 +677,7 @@ export const PROJECTS_LIST: ProjectItem[] = [
     status: "Completed",
     featured: false,
     imageUrl: architectureImg,
-    repoUrl: "https://github.com/vishesh-srivastava/agro-gradio",
+    repoUrl: "https://github.com/96Vishesh/agro-gradio",
     demoUrl: "",
     documentationSlugs: []
   },
@@ -662,13 +721,112 @@ export const PROJECTS_LIST: ProjectItem[] = [
     testingAndValidation: "Tested on physical Android devices across multiple OS versions; verified continuous playback across lockscreen and background multitasking.",
     resultsAndLessons: "Cemented understanding of reactive UI state patterns in Dart and native mobile platform channel lifecycles.",
     status: "Completed",
-    featured: true,
+    featured: false,
     imageUrl: mobileInterfaceImg,
-    repoUrl: "https://github.com/vishesh-srivastava/music-library-flutter",
+    repoUrl: "https://github.com/96Vishesh/music-library-flutter",
     demoUrl: "",
     documentationSlugs: ["music-library-spec"]
   }
 ];
+
+export const RESUME_TEXT = `VISHESH SRIVASTAVA
+Prayagraj, Uttar Pradesh, India
+Email: srivastava.vishesh96@gmail.com | Phone: +91-9354384545
+LinkedIn: linkedin.com/in/vishesh-s-811914234
+GitHub: github.com/96Vishesh
+
+================================================================================
+SUMMARY
+================================================================================
+MCA graduate with hands-on experience in software development, automation, and
+AI-integrated workflows. Proficient in Python and Bash scripting for automation,
+with exposure to CI/CD principles, Git-based version control workflows, and
+containerised deployments using Docker. Experienced in integrating LLM-powered
+pipelines and building scalable backend systems using Java, Spring Boot, and
+Flask. Strong interest in cloud-native solutions, distributed architectures, and
+emerging technologies such as AI/ML and LangChain-style frameworks. Comfortable
+working in fast-paced, collaborative Agile environments with a focus on system
+reliability and performance optimisation.
+
+================================================================================
+EXPERIENCE
+================================================================================
+Flutter Developer — Relu Consultancy                 Feb 2025 – Present
+- Developed cross-platform mobile applications using Flutter and Dart, following
+  Agile workflows with Git for version control and collaborative code management.
+- Built a booking application (similar to District / BookMyShow) targeting
+  toddlers through college-going students — supporting event discovery, seat
+  selection, and payment workflows.
+- Developed a fully automated lead-extraction pipeline that processes raw data,
+  extracts valid emails, and sequences personalised outreach.
+- Engineered an automated LinkedIn lead-generation service that monitors posts,
+  extracts commenter profiles, and dispatches sequenced outreach emails using
+  LLM-based content generation.
+- Collaborated with backend teams to integrate REST APIs into mobile screens.
+- Documented workflows and API integrations for team knowledge-sharing.
+
+================================================================================
+PROJECTS
+================================================================================
+FlowForge — Automated JD Resume Customization Tool                     Oct 2025
+Technologies: Python, Java, Flask, PostgreSQL, Selenium, Angular, Spring Boot
+- Built an automated pipeline that scrapes job descriptions and dynamically
+  tailors resumes using Python scripting and NLP-driven matching logic.
+- Implemented backend logic to process JD data, map required skills, and
+  generate customized resume content.
+- Designed RESTful APIs for job scraping, resume generation, and persistence.
+
+ShelfSync — Enterprise Inventory Management System                     May 2025
+Technologies: Spring Boot, PostgreSQL, RESTful APIs
+- Built a scalable system to manage products, batches, stock levels, and
+  availability across distributed data layers.
+- Implemented services for inventory tracking, batch lifecycle management, and
+  real-time stock updates.
+- Designed RESTful APIs for inventory operations and reporting.
+
+CafeEase — Cafe Management System                                      Apr 2025
+Technologies: Angular.js, Java, Spring Boot, Hibernate, MySQL
+- Developed backend services for order processing, billing, and inventory.
+- Implemented order lifecycle logic and transaction-based stock deduction.
+- Ensured consistency between orders, inventory, and billing records.
+
+ARtify — Augmented Reality Face Filter Web App                         Apr 2024
+Technologies: Python, Flask, OpenCV
+- Developed a web-based AR application applying real-time face filters.
+- Implemented backend services for image processing under load.
+- Integrated CV models to detect facial landmarks and render AR effects.
+
+================================================================================
+TECHNICAL SKILLS
+================================================================================
+Languages:        Java, Python, Dart, Bash, SQL, JavaScript
+Mobile Dev:       Flutter, Dart, Android Studio
+CI/CD & DevOps:   Git, GitHub, Gerrit (familiar), Jenkins (familiar), Docker,
+                  Kubernetes (familiar)
+Cloud & Infra:    Render, Exoscale (familiar), cloud-native deployment principles
+AI/ML & LLMs:     LLM integration, LangChain-style pipelines, Python-based
+                  automation, IBM AI certifications
+Backend & APIs:   Spring Boot, Flask, Express.js, Hibernate/JPA, RESTful APIs
+Web:              HTML, CSS, Angular (Basic), JSON
+Databases:        PostgreSQL, MySQL
+Dev Tools:        IntelliJ IDEA, VS Code, Postman, OpenAPI, Jupyter Notebook
+
+================================================================================
+EDUCATION
+================================================================================
+Master of Computer Applications (MCA)                       Sept 2024 – Present
+SRM University, Sonepat, Haryana                    Current CGPA: 7.89 / 10.0
+
+Bachelor of Computer Applications (BCA)                   Sept 2021 – May 2024
+United University, Prayagraj, Uttar Pradesh   CGPA: 9.05 / 10.0 | 1st Rank
+
+================================================================================
+CERTIFICATIONS
+================================================================================
+- Software Engineering Job Simulation — JPMorgan Chase & Co. (Forage)
+- Development with Java — Enterprise Java and Spring Framework
+- Python for Data Science — IBM
+- Artificial Intelligence Analyst — IBM`;
 
 export const DOCUMENT_CATALOG: DocumentItem[] = [
   {
@@ -678,75 +836,11 @@ export const DOCUMENT_CATALOG: DocumentItem[] = [
     category: "Resume & Profile",
     fileType: "PDF",
     lastUpdated: "2026",
-    description: "Full professional resume summarizing educational background, MCA & BCA achievements, backend technical skills, selected project deliverables, and contact details.",
-    technologies: ["Java", "Spring Boot", "Python", "Flask", "PostgreSQL", "Angular", "Docker"],
-    downloadFileName: "Vishesh_Srivastava_Resume.txt",
-    content: `# VISHESH SRIVASTAVA
-Software Developer | Backend & Full-Stack Engineer | Automation and AI Enthusiast
-Email: srivastava.vishesh96@gmail.com
-LinkedIn: linkedin.com/in/vishesh-srivastava
-GitHub: github.com/vishesh-srivastava
-
-================================================================================
-PROFESSIONAL SUMMARY
-================================================================================
-Computer Applications graduate with a strong technical foundation in backend
-architecture, relational database modeling, enterprise Java (Spring Boot, Hibernate),
-Python service development (Flask, Django), and automation workflows. Demonstrated
-academic excellence with a 9.05 GPA (1st Rank) in BCA and a 7.89 CGPA in MCA.
-Passionate about building scalable REST APIs, reliable transactional systems,
-and modern full-stack web applications.
-
-================================================================================
-EDUCATION
-================================================================================
-Master of Computer Applications (MCA)
-SRM University | 2024 – 2026
-- Current CGPA: 7.89
-- Core focus: Distributed Systems, Advanced Database Design, Cloud Platforms,
-  Software Architecture & Quality Assurance.
-
-Bachelor of Computer Applications (BCA)
-United University | 2021 – 2024
-- Graduation GPA: 9.05 (First Rank / Academic Gold Medalist)
-- Core focus: Object-Oriented Programming (Java), Data Structures & Algorithms,
-  Relational Database Management (SQL), Web Technologies.
-
-================================================================================
-TECHNICAL SKILLS
-================================================================================
-- Programming Languages: Java, Python, JavaScript, SQL, HTML5, CSS3
-- Backend Frameworks: Spring Boot, Hibernate / JPA, Flask, Django, Express.js, REST APIs
-- Frontend Technologies: Angular, React, Responsive Design, TypeScript
-- Databases & Storage: PostgreSQL, MySQL, Firebase Firestore
-- Mobile Development: Flutter, Dart
-- Automation & Tools: Git, GitHub, Docker, Maven, Postman, Swagger/OpenAPI, Selenium, Render
-
-================================================================================
-SELECTED PROJECTS
-================================================================================
-1. FlowForge – Automated JD & Resume Customization Tool
-   Technologies: Python, Flask, PostgreSQL, Selenium, Angular, Spring Boot
-   - Engineered an automated parsing pipeline extracting technical requirements from job descriptions.
-   - Built a dynamic scoring algorithm comparing candidate credentials against JD requirements.
-   - Implemented headless Selenium workflows to streamline portal validation and reporting.
-
-2. ShelfSync – Enterprise Inventory Management System
-   Technologies: Spring Boot, Hibernate/JPA, PostgreSQL, Angular, Docker
-   - Architected transactional (@Transactional) inventory ledger with pessimistic locking.
-   - Optimized database access via JPA EntityGraphs, reducing queries by over 95%.
-   - Built modular REST endpoints with Bean Validation and comprehensive OpenAPI documentation.
-
-3. TrackNinja / SafeWalk – AI-Powered Crime Prediction & Safety Analysis
-   Technologies: Flask, Google Maps API, Firebase, Twilio, Python
-   - Integrated Google Maps API to visualize transit routes and incident heatmaps.
-   - Designed Flask microservices calculating spatial risk indices based on historical records.
-   - Configured Twilio webhook automation for instant emergency SMS broadcasting.
-
-4. Music Library Mobile App – Flutter
-   Technologies: Flutter, Dart, Provider State Management, Native Audio Services
-   - Developed native mobile media player with real-time waveform visualization and background audio.
-   - Implemented reactive state management using Provider to decouple audio lifecycles from UI routes.`
+    description: "Full professional resume covering experience at Relu Consultancy, MCA & BCA education, technical skills, projects, and certifications.",
+    technologies: ["Java", "Spring Boot", "Python", "Flask", "Flutter", "PostgreSQL", "Docker"],
+    downloadFileName: RESUME_PDF_FILENAME,
+    fileUrl: RESUME_PDF_URL,
+    content: RESUME_TEXT
   },
   {
     id: "doc-flowforge-arch",

@@ -30,7 +30,13 @@ import {
 
 function PortfolioApp() {
   const [profile, setProfile] = useState<ProfileData>(INITIAL_PROFILE);
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
+    try {
+      return localStorage.getItem('theme') === 'light' ? 'light' : 'dark';
+    } catch {
+      return 'dark';
+    }
+  });
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
   const [profileEditorOpen, setProfileEditorOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
@@ -47,6 +53,11 @@ function PortfolioApp() {
     } else {
       document.documentElement.classList.add('dark');
       document.documentElement.classList.remove('light');
+    }
+    try {
+      localStorage.setItem('theme', theme);
+    } catch {
+      // Storage unavailable (private mode etc.); theme just won't persist.
     }
   }, [theme]);
 

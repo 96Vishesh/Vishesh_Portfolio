@@ -26,15 +26,14 @@ export function DocumentationSection({ onSelectDocument }: DocumentationSectionP
 
   const handleDownload = (e: React.MouseEvent, doc: DocumentItem) => {
     e.stopPropagation();
-    const blob = new Blob([doc.content], { type: 'text/plain;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
+    const url = doc.fileUrl ?? URL.createObjectURL(new Blob([doc.content], { type: 'text/plain;charset=utf-8' }));
     const link = document.createElement('a');
     link.href = url;
     link.download = doc.downloadFileName;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    URL.revokeObjectURL(url);
+    if (!doc.fileUrl) URL.revokeObjectURL(url);
     showToast({ type: 'success', title: 'File Downloaded', description: doc.downloadFileName });
   };
 

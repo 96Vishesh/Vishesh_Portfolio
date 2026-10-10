@@ -15,9 +15,9 @@ export function ContactSection({ profile }: ContactSectionProps) {
     message: ''
   });
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
+  const [copiedWhatsapp, setCopiedWhatsapp] = useState(false);
   const { showToast } = useToast();
 
   const handleCopyEmail = () => {
@@ -25,6 +25,13 @@ export function ContactSection({ profile }: ContactSectionProps) {
     setCopiedEmail(true);
     showToast({ type: 'success', title: 'Email Copied!', description: profile.email });
     setTimeout(() => setCopiedEmail(false), 2500);
+  };
+
+  const handleCopyWhatsapp = () => {
+    navigator.clipboard.writeText(profile.whatsappUsername);
+    setCopiedWhatsapp(true);
+    showToast({ type: 'success', title: 'Username Copied!', description: profile.whatsappUsername });
+    setTimeout(() => setCopiedWhatsapp(false), 2500);
   };
 
   const validate = () => {
@@ -47,18 +54,20 @@ export function ContactSection({ profile }: ContactSectionProps) {
     e.preventDefault();
     if (!validate()) return;
 
-    setIsSubmitting(true);
+    const text = [
+      `Hi Vishesh, I'm ${formData.name} (${formData.email}).`,
+      `Subject: ${formData.subject}`,
+      '',
+      formData.message
+    ].join('\n');
+    window.open(`https://wa.me/${profile.whatsapp}?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
 
-    // Simulate reliable dispatch
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-      showToast({
-        type: 'success',
-        title: 'Message Staged Successfully!',
-        description: `Thank you, ${formData.name}. You can also email directly at ${profile.email}.`
-      });
-    }, 900);
+    setIsSubmitted(true);
+    showToast({
+      type: 'success',
+      title: 'Opening WhatsApp',
+      description: `Thank you, ${formData.name}. Tap send in WhatsApp to deliver your message.`
+    });
   };
 
   return (
@@ -113,6 +122,42 @@ export function ContactSection({ profile }: ContactSectionProps) {
                   className="inline-flex items-center gap-1.5 text-xs text-[#FF6B35] hover:underline font-mono"
                 >
                   <span>Open in default email client</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </a>
+              </div>
+            </div>
+
+            {/* WhatsApp Card */}
+            <div className="p-6 rounded-2xl bg-[#13171E] border border-white/10 shadow-xl space-y-4">
+              <div className="flex items-center gap-2 text-xs font-mono text-[#FF6B35] uppercase">
+                <MessageSquare className="w-4 h-4" />
+                <span>Chat on WhatsApp</span>
+              </div>
+              <p className="text-sm text-slate-300">
+                Find me on WhatsApp by username:
+              </p>
+
+              <div className="flex items-center justify-between p-3 rounded-xl bg-black/40 border border-white/5">
+                <span className="font-mono text-xs text-white truncate mr-2 select-all">
+                  @{profile.whatsappUsername}
+                </span>
+                <button
+                  onClick={handleCopyWhatsapp}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-semibold text-white transition-colors shrink-0"
+                >
+                  {copiedWhatsapp ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                  <span>{copiedWhatsapp ? 'Copied' : 'Copy'}</span>
+                </button>
+              </div>
+
+              <div className="pt-2">
+                <a
+                  href={`https://wa.me/${profile.whatsapp}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs text-[#FF6B35] hover:underline font-mono"
+                >
+                  <span>Start a chat now</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </a>
               </div>
@@ -179,9 +224,9 @@ export function ContactSection({ profile }: ContactSectionProps) {
                 <div className="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto">
                   <Check className="w-5 h-5" />
                 </div>
-                <h4 className="text-base font-bold text-white">Message Staged!</h4>
+                <h4 className="text-base font-bold text-white">WhatsApp Opened!</h4>
                 <p className="text-xs text-slate-300 max-w-md mx-auto leading-relaxed">
-                  Thank you for reaching out, {formData.name}. Your message draft has been received. You can also send directly via email to <span className="text-[#FF6B35] font-mono">{profile.email}</span>.
+                  Thank you for reaching out, {formData.name}. Tap send in WhatsApp to deliver your message. If the chat didn't open, search <span className="text-white font-mono">@{profile.whatsappUsername}</span> in WhatsApp, <a href={`https://wa.me/${profile.whatsapp}`} target="_blank" rel="noreferrer" className="text-[#FF6B35] underline">open the chat here</a>, or email <span className="text-[#FF6B35] font-mono">{profile.email}</span>.
                 </p>
                 <div className="pt-2">
                   <button
@@ -257,14 +302,13 @@ export function ContactSection({ profile }: ContactSectionProps) {
 
                 <div className="pt-2 flex items-center justify-between">
                   <p className="text-[11px] text-slate-500 font-mono">
-                    Client-validated form submission
+                    Sends via WhatsApp
                   </p>
                   <button
                     type="submit"
-                    disabled={isSubmitting}
                     className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#FF6B35] hover:bg-[#FA571A] text-xs font-semibold text-white transition-all shadow-md shadow-[#FF6B35]/25 active:scale-[0.98] disabled:opacity-50"
                   >
-                    <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
+                    <span>Send on WhatsApp</span>
                     <Send className="w-3.5 h-3.5" />
                   </button>
                 </div>

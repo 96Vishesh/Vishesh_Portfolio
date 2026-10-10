@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Download, Printer, ExternalLink, GraduationCap, Award, Briefcase, FileCode, Copy, CheckCircle2 } from 'lucide-react';
-import { ProfileData, EDUCATION_LIST, PROJECTS_LIST, SKILL_CATEGORIES } from '../data/portfolioData';
+import { ProfileData, EDUCATION_LIST, EXPERIENCE_LIST, CERTIFICATIONS, PROJECTS_LIST, SKILL_CATEGORIES, RESUME_TEXT, RESUME_PDF_URL, RESUME_PDF_FILENAME } from '../data/portfolioData';
 import { useToast } from './Toast';
 
 interface ResumeSectionProps {
@@ -16,44 +16,14 @@ export function ResumeSection({ profile, onOpenDocPreview }: ResumeSectionProps)
     window.print();
   };
 
-  const handleDownloadTxtResume = () => {
-    const resumeText = `VISHESH SRIVASTAVA
-Software Developer | Backend & Full-Stack Engineer | Automation and AI Enthusiast
-Email: ${profile.email}
-LinkedIn: ${profile.linkedin}
-GitHub: ${profile.github}
-
-PROFESSIONAL SUMMARY:
-${profile.bio}
-
-EDUCATION:
-- Master of Computer Applications (MCA), SRM University (2024-2026) | CGPA: 7.89
-- Bachelor of Computer Applications (BCA), United University (2021-2024) | GPA: 9.05 (First Rank / Gold Medalist)
-
-TECHNICAL SKILLS:
-- Languages: Java, Python, JavaScript, SQL, HTML, CSS
-- Backend: Spring Boot, Hibernate/JPA, Flask, Django, Express.js, REST APIs
-- Frontend: Angular, React, Responsive Design, TypeScript
-- Databases: PostgreSQL, MySQL, Firebase Firestore
-- Mobile: Flutter, Dart
-- Tools: Git, Docker, Maven, Postman, Swagger/OpenAPI, Selenium, Render
-
-KEY PROJECTS:
-1. FlowForge - Automated JD & Resume Customization Tool (Python, Flask, PostgreSQL, Selenium, Angular)
-2. ShelfSync - Enterprise Inventory Management System (Spring Boot, Hibernate, PostgreSQL, Angular)
-3. SafeWalk - AI-Powered Crime Prediction & Safety Analysis (Flask, Google Maps API, Firebase, Twilio)
-4. Music Library App - Cross-Platform Audio Player (Flutter, Dart, Provider)`;
-
-    const blob = new Blob([resumeText], { type: 'text/plain;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
+  const handleDownloadResume = () => {
     const link = document.createElement('a');
-    link.href = url;
-    link.download = 'Vishesh_Srivastava_Resume.txt';
+    link.href = RESUME_PDF_URL;
+    link.download = RESUME_PDF_FILENAME;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    URL.revokeObjectURL(url);
-    showToast({ type: 'success', title: 'Resume Downloaded', description: 'Vishesh_Srivastava_Resume.txt' });
+    showToast({ type: 'success', title: 'Resume Downloaded', description: RESUME_PDF_FILENAME });
   };
 
   return (
@@ -106,11 +76,11 @@ KEY PROJECTS:
             </button>
 
             <button
-              onClick={handleDownloadTxtResume}
+              onClick={handleDownloadResume}
               className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#FF6B35] hover:bg-[#FA571A] text-xs font-semibold text-white transition-colors shadow-sm"
             >
               <Download className="w-3.5 h-3.5" />
-              <span>Download Resume</span>
+              <span>Download Resume (PDF)</span>
             </button>
           </div>
         </div>
@@ -133,7 +103,37 @@ KEY PROJECTS:
                 <p>Email: <a href={`mailto:${profile.email}`} className="text-white hover:underline">{profile.email}</a></p>
                 <p>Location: <span className="text-white">{profile.location}</span></p>
                 <p>Status: <span className="text-emerald-400 font-semibold">{profile.opportunityNote}</span></p>
-                <p className="pt-1 text-[11px] text-slate-500">Links: GitHub · LinkedIn</p>
+                <p className="pt-1 text-[11px] text-slate-500">Links: <a href={profile.github} target="_blank" rel="noreferrer" className="hover:text-white">GitHub</a> · <a href={profile.linkedin} target="_blank" rel="noreferrer" className="hover:text-white">LinkedIn</a></p>
+              </div>
+            </div>
+
+            {/* Experience Section */}
+            <div className="space-y-4">
+              <div className="flex items-center gap-2 text-xs font-mono text-[#FF6B35] uppercase tracking-wider">
+                <Briefcase className="w-4 h-4" />
+                <span>Professional Experience</span>
+              </div>
+
+              <div className="space-y-4">
+                {EXPERIENCE_LIST.map((exp) => (
+                  <div key={exp.id} className="p-4 rounded-xl bg-[#0E1217] border border-white/5">
+                    <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-2">
+                      <div>
+                        <h3 className="text-base font-bold text-white">{exp.role}</h3>
+                        <p className="text-xs text-slate-300 font-medium">{exp.company}</p>
+                      </div>
+                      <span className="text-xs font-mono text-slate-400">{exp.period}</span>
+                    </div>
+                    <ul className="space-y-1.5">
+                      {exp.highlights.map((item, idx) => (
+                        <li key={idx} className="flex gap-2 text-xs text-slate-300 leading-relaxed">
+                          <span className="w-1 h-1 mt-1.5 shrink-0 rounded-full bg-[#FF6B35]" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
               </div>
             </div>
 
@@ -172,7 +172,7 @@ KEY PROJECTS:
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {SKILL_CATEGORIES.slice(0, 4).map((cat) => (
+                {SKILL_CATEGORIES.map((cat) => (
                   <div key={cat.id} className="p-4 rounded-xl bg-[#0E1217] border border-white/5">
                     <p className="text-xs font-mono text-[#FF6B35] uppercase mb-1.5">{cat.title}</p>
                     <p className="text-xs text-slate-300 leading-relaxed">
@@ -186,7 +186,7 @@ KEY PROJECTS:
             {/* Selected Projects */}
             <div className="space-y-4">
               <div className="flex items-center gap-2 text-xs font-mono text-[#FF6B35] uppercase tracking-wider">
-                <Briefcase className="w-4 h-4" />
+                <FileCode className="w-4 h-4" />
                 <span>Selected Software Projects</span>
               </div>
 
@@ -213,64 +213,27 @@ KEY PROJECTS:
               </div>
             </div>
 
+            {/* Certifications */}
+            <div className="space-y-4">
+              <div className="flex items-center gap-2 text-xs font-mono text-[#FF6B35] uppercase tracking-wider">
+                <Award className="w-4 h-4" />
+                <span>Certifications</span>
+              </div>
+              <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {CERTIFICATIONS.map((cert) => (
+                  <li key={cert} className="p-3 rounded-xl bg-[#0E1217] border border-white/5 text-xs text-slate-300">
+                    {cert}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
           </div>
         ) : (
           /* ATS Monospace Formatted View */
           <div className="bg-[#0A0C0E] border border-white/10 rounded-2xl p-6 sm:p-10 font-mono text-xs text-slate-300 overflow-x-auto shadow-2xl">
             <pre className="whitespace-pre-wrap leading-relaxed">
-{`================================================================================
-VISHESH SRIVASTAVA
-Software Developer | Backend & Full-Stack Engineer | Automation and AI Enthusiast
-Email: ${profile.email}
-Location: ${profile.location}
-LinkedIn: ${profile.linkedin}
-GitHub: ${profile.github}
-================================================================================
-
-PROFESSIONAL SUMMARY
---------------------
-${profile.bio}
-
-EDUCATION
----------
-1. Master of Computer Applications (MCA)
-   SRM University (2024 – 2026)
-   Current CGPA: 7.89
-   Focus: Distributed Systems, Advanced Database Design, Cloud Architectures.
-
-2. Bachelor of Computer Applications (BCA)
-   United University (2021 – 2024)
-   Graduation GPA: 9.05 (First Rank / Academic Gold Medalist)
-   Focus: OOP in Java, Relational Databases (SQL), Data Structures & Algorithms.
-
-TECHNICAL SKILLS
-----------------
-- Languages: Java, Python, JavaScript, SQL, HTML5, CSS3
-- Backend: Spring Boot, Hibernate / JPA, Flask, Django, Express.js, REST APIs
-- Frontend: Angular, React, Responsive Web Development, TypeScript
-- Databases: PostgreSQL, MySQL, Firebase Firestore
-- Mobile Development: Flutter, Dart
-- Tools & Automation: Git, GitHub, Docker, Maven, Postman, OpenAPI, Selenium, Render
-
-KEY PROJECTS
-------------
-1. FlowForge – Automated JD & Resume Customization Tool
-   Stack: Python, Flask, PostgreSQL, Selenium, Angular, Spring Boot
-   - Implemented automated job requirement parsing engine and match scoring matrices.
-   - Built headless browser automation workflows with Selenium to verify application pipelines.
-
-2. ShelfSync – Enterprise Inventory Management System
-   Stack: Spring Boot, Hibernate / JPA, PostgreSQL, Angular, Docker
-   - Architected ACID-compliant transactional inventory ledger with pessimistic locks.
-   - Optimized queries via JPA EntityGraphs, reducing retrieval latency significantly.
-
-3. TrackNinja / SafeWalk – AI-Powered Crime Prediction & Safety Analysis
-   Stack: Flask, Google Maps API, Firebase, Twilio, Python
-   - Integrated Google Maps API polyline routing and emergency SMS alert dispatch via Twilio.
-
-4. Music Library App – Flutter Mobile Player
-   Stack: Flutter, Dart, Provider State Management, Native Audio Service
-   - Built cross-platform mobile player with real-time waveform visualization and background audio.`}
+{RESUME_TEXT}
             </pre>
           </div>
         )}

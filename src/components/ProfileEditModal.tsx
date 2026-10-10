@@ -205,10 +205,10 @@ export function ProfileEditModal({
                   <span>How to Add Your Actual Resume PDF</span>
                 </h3>
                 <p className="text-xs text-slate-400">
-                  Place your actual PDF file in the <code className="text-[#FF6B35] font-mono">public/</code> directory as <code className="text-white font-mono">Vishesh_Srivastava_Resume.pdf</code>.
+                  Replace the PDF at <code className="text-[#FF6B35] font-mono">src/assets/resume/</code>, keeping the name <code className="text-white font-mono">Vishesh_Srivastava_Resume.pdf</code>.
                 </p>
                 <p className="text-xs text-slate-400">
-                  In <code className="text-white font-mono">src/data/portfolioData.ts</code>, update the <code className="font-mono text-emerald-400">doc-resume</code> item with the file path.
+                  In <code className="text-white font-mono">src/data/portfolioData.ts</code>, update <code className="font-mono text-emerald-400">RESUME_TEXT</code> so the in-page preview matches.
                 </p>
               </div>
 

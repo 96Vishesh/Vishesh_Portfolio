@@ -1,0 +1,87 @@
+/*
+ * Light theme.
+ * Components are styled with fixed dark-palette utilities (bg-[#13171E], text-white, border-white/10 ...).
+ * When <html> has the `light` class, these rules remap that palette to light equivalents.
+ * Unlayered CSS beats Tailwind's @layer utilities, so no !important is needed.
+ * Text on the orange accent buttons is excluded so it stays white.
+ */
+
+.light {
+  color-scheme: light;
+}
+
+/* ---------- Surfaces ---------- */
+.light .bg-\[\#0B0D10\],
+.light .bg-\[\#080A0D\] { background-color: #F8FAFC; }
+.light .bg-\[\#0B0D10\]\/40,
+.light .bg-\[\#0B0D10\]\/50,
+.light .bg-\[\#0B0D10\]\/60,
+.light .bg-\[\#0B0D10\]\/70,
+.light .bg-\[\#0B0D10\]\/80,
+.light .bg-\[\#0B0D10\]\/85 { background-color: rgb(248 250 252 / 0.85); }
+
+.light .bg-\[\#13171E\],
+.light .bg-\[\#1A1F29\],
+.light .bg-\[\#151A22\] { background-color: #FFFFFF; }
+.light .bg-\[\#13171E\]\/50,
+.light .bg-\[\#13171E\]\/60,
+.light .bg-\[\#13171E\]\/70,
+.light .bg-\[\#13171E\]\/80,
+.light .bg-\[\#1A1F29\]\/50,
+.light .bg-\[\#1A1F29\]\/60 { background-color: rgb(255 255 255 / 0.8); }
+
+.light .bg-\[\#0E1217\],
+.light .bg-\[\#0A0C0E\] { background-color: #F1F5F9; }
+
+.light .bg-black\/30,
+.light .bg-black\/40 { background-color: #F1F5F9; }
+
+.light .bg-white\/\[0\.02\],
+.light .bg-white\/5 { background-color: rgb(15 23 42 / 0.04); }
+.light .bg-white\/10 { background-color: rgb(15 23 42 / 0.07); }
+.light .bg-white\/15,
+.light .bg-white\/20 { background-color: rgb(15 23 42 / 0.1); }
+
+.light .hover\:bg-white\/5:hover { background-color: rgb(15 23 42 / 0.06); }
+.light .hover\:bg-white\/10:hover,
+.light .hover\:bg-white\/15:hover,
+.light .hover\:bg-white\/20:hover { background-color: rgb(15 23 42 / 0.1); }
+
+/* ---------- Borders ---------- */
+.light .border-white\/5,
+.light .divide-white\/5 > :not(:last-child) { border-color: rgb(15 23 42 / 0.07); }
+.light .border-white\/10 { border-color: rgb(15 23 42 / 0.12); }
+.light .border-white\/20,
+.light .border-white\/25 { border-color: rgb(15 23 42 / 0.2); }
+.light .hover\:border-white\/20:hover { border-color: rgb(15 23 42 / 0.25); }
+
+/* ---------- Text ---------- */
+.light .text-white:not([class*="bg-[#FF6B35]"]):not([class*="bg-[#FF6B35]"] *),
+.light .text-\[\#F5F5F2\],
+.light .text-slate-200 { color: #0F172A; }
+.light .text-slate-300 { color: #334155; }
+.light .text-slate-400 { color: #475569; }
+.light .text-slate-500 { color: #64748B; }
+.light .text-slate-600,
+.light .text-slate-700 { color: #94A3B8; }
+.light .text-\[\#FF6B35\] { color: #EA580C; }
+
+.light .hover\:text-white:hover:not([class*="bg-[#FF6B35]"]),
+.light .hover\:text-\[\#F5F5F2\]:hover,
+.light .group:hover .group-hover\:text-white { color: #0F172A; }
+
+.light .placeholder-slate-500::placeholder { color: #94A3B8; }
+
+/* ---------- Gradients (e.g. headline text) ---------- */
+.light .from-\[\#F5F5F2\] { --tw-gradient-from: #0F172A; }
+.light .via-\[\#F5F5F2\] { --tw-gradient-via: #334155; }
+.light .from-\[\#13171E\] { --tw-gradient-from: #FFFFFF; }
+.light .via-\[\#13171E\]\/30 { --tw-gradient-via: rgb(255 255 255 / 0.3); }
+.light .via-\[\#0B0D10\]\/30 { --tw-gradient-via: rgb(248 250 252 / 0.3); }
+.light .from-\[\#0B0D10\]\/80,
+.light .from-\[\#0B0D10\]\/90 { --tw-gradient-from: rgb(248 250 252 / 0.85); }
+.light .to-white\/10 { --tw-gradient-to: rgb(15 23 42 / 0.08); }
+
+/* ---------- Scrollbar ---------- */
+.light ::-webkit-scrollbar-track { background: #F1F5F9; }
+.light ::-webkit-scrollbar-thumb { background: #CBD5E1; }
